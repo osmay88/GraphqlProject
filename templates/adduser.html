@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new user</title>
+</head>
+<br>
+
+<form id="adduser" name="adduser">
+    <label for="name">Name</label> <input type="text" name="name" id="name" placeholder="Enter your name"></br>
+    <label for="username">Username</label> <input type="text" name="username" id="username" placeholder="Enter your username"></br>
+    <label for="cps">Credential Profiles</label> <input type="text" name="cps" id="cps" placeholder="CP separated by `;`"></br>
+    <button id="submit" name="submit">Add user</button>
+</form>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $('#submit').click(function (data) {
+//        event.preventDefault();
+        $.ajax({
+            url: '/adduser',
+            type: 'post',
+            dataType: 'json',contentType: "application/json; charset=utf-8",
+            traditional: true,
+            data: JSON.stringify({
+                "name": $('#name').val(),
+                "username": $('#username').val(),
+                "cps": $('#cps').val()
+            }),
+            success: function (data) {
+                window.alert('All good');
+            },
+            error: function (erre) {
+                window.alert('This is broken');
+
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
